@@ -1,10 +1,10 @@
 ---
-Name: cron
-Vendor: Red Hat
-Cartridge-Short-Name: CRON
+Name: acron
+Vendor: jpic
+Cartridge-Short-Name: ACRON
 Version: '1.4'
 Architecture: noarch
-Display-Name: Cron 1.4
+Display-Name: ACron 1.4
 Description: The Cron cartridge allows you to run command line programs at scheduled
   times. Use this for background jobs and periodic processing.
 License: ASL 2.0

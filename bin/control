@@ -2,7 +2,7 @@
 source $OPENSHIFT_CARTRIDGE_SDK_BASH
 
 function _are_cronjobs_enabled() {
-   [ -f $OPENSHIFT_CRON_DIR/run/jobs.enabled ]  &&  return 0
+   [ -f $OPENSHIFT_ACRON_DIR/run/jobs.enabled ]  &&  return 0
    return 1
 
 }  #  End of function  _are_cronjobs_enabled.
@@ -21,14 +21,14 @@ function start() {
     if _are_cronjobs_enabled; then
         client_result "cron scheduling service is already enabled for gear $OPENSHIFT_GEAR_UUID"
     else
-        touch "$OPENSHIFT_CRON_DIR/run/jobs.enabled"
+        touch "$OPENSHIFT_ACRON_DIR/run/jobs.enabled"
     fi
 }
 
 function stop() {
     echo "Stopping Cron cartridge"
     if _are_cronjobs_enabled; then
-        rm -f $OPENSHIFT_CRON_DIR/run/jobs.enabled
+        rm -f $OPENSHIFT_ACRON_DIR/run/jobs.enabled
     else
         client_result "cron scheduling service is already disabled for gear $OPENSHIFT_GEAR_UUID"
     fi
@@ -44,7 +44,7 @@ function restart() {
 function status() {
   if [ -d "$OPENSHIFT_REPO_DIR/.openshift/cron" ]; then
       njobs=0
-      for freq in `cat $OPENSHIFT_CRON_DIR/configuration/frequencies`; do
+      for freq in `cat $OPENSHIFT_ACRON_DIR/configuration/frequencies`; do
          if [ -d "$OPENSHIFT_REPO_DIR/.openshift/cron/$freq" ]; then
             jobcnt=$(ls $OPENSHIFT_REPO_DIR/.openshift/cron/$freq | wc -l)
             njobs=$((njobs + jobcnt))

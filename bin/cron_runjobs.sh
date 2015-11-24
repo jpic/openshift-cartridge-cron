@@ -32,7 +32,7 @@ done
 export PATH=$(build_path)
 export LD_LIBRARY_PATH=$(build_ld_library_path)
 
-CART_CONF_DIR=$OPENSHIFT_CRON_DIR/configuration
+CART_CONF_DIR=$OPENSHIFT_ACRON_DIR/configuration
 
 function log_message() {
    msg=${1-""}
@@ -53,7 +53,7 @@ source "$CART_CONF_DIR/limits"
 [[ -f /etc/openshift/cron/limits ]] && source /etc/openshift/cron/limits
 
 # First up check if the cron jobs are enabled.
-if [ ! -f $OPENSHIFT_CRON_DIR/run/jobs.enabled ]; then
+if [ ! -f $OPENSHIFT_ACRON_DIR/run/jobs.enabled ]; then
    # Jobs are not enabled - just exit.
    exit 0
 fi
@@ -80,8 +80,8 @@ if [ -d "$SCRIPTS_DIR" ]; then
               exit 1
           fi
 
-          if [ -f "$OPENSHIFT_CRON_DIR/log/cron.$freq.log" ]; then
-              mv -f "$OPENSHIFT_CRON_DIR/log/cron.$freq.log" "$OPENSHIFT_CRON_DIR/log/cron.$freq.log.1"
+          if [ -f "$OPENSHIFT_ACRON_DIR/log/cron.$freq.log" ]; then
+              mv -f "$OPENSHIFT_ACRON_DIR/log/cron.$freq.log" "$OPENSHIFT_ACRON_DIR/log/cron.$freq.log.1"
           fi
 
           LOGPIPE=${OPENSHIFT_HOMEDIR}/app-root/runtime/logshifter-cron-${freq}

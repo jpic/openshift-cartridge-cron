@@ -5,7 +5,7 @@ source $OPENSHIFT_CARTRIDGE_SDK_BASH
 # only print this message on the "main" gear, not any scaled gears (for scalable apps) 
 # or secondary haproxy gears (for ha applications)
 if [ "$OPENSHIFT_GEAR_DNS" == "$OPENSHIFT_APP_DNS" ]; then
-    frequencies=$(cat $OPENSHIFT_CRON_DIR/configuration/frequencies | tr '\n' ',')
+    frequencies=$(cat $OPENSHIFT_ACRON_DIR/configuration/frequencies | tr '\n' ',')
     client_result ""
     client_result "To schedule your scripts to run on a periodic basis, add the scripts to "
     client_result "your application's .openshift/cron/{${frequencies%?}}/"
